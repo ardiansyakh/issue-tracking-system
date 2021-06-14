@@ -14,7 +14,7 @@ module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.bulkInsert('employees', employees, {})
     await queryInterface.sequelize.query(`
-    SELECT setval('employees_id_seq' , (SELECT MAX(id) FROM "employees"))`)
+    SELECT setval('"employees_id_seq"' , (SELECT MAX(id) FROM "employees"))`)
     /**
      * Add seed commands here.
      *

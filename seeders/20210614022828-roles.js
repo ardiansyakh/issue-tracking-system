@@ -12,7 +12,7 @@ module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.bulkInsert('roles', roles, {})
     await queryInterface.sequelize.query(`
-    SELECT setval('roles_id_seq' , (SELECT MAX(id) FROM "roles"))`)
+    SELECT setval('"roles_id_seq"' , (SELECT MAX(id) FROM "roles"))`)
     /**
      * Add seed commands here.
      *
