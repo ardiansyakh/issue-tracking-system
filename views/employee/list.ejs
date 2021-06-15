@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ISM - Employee</title>
+</head>
+<body>
+    <h1>Employee List</h1>
+    <% if (notif) { %>
+        <h2><%= notif %></h2>
+    <% } %> 
+
+    <a href="/employee/add">Add Employee</a>
+    <table border="1">
+        <tr>
+            <td>Username</td>
+            <td>Full Name</td>
+            <td>Role</td>
+            <td>Action</td>
+        </tr>
+        <% data.forEach(employee =>{%>
+            <tr>
+                <td><%= employee.employee_username%></td>
+                <td><%= employee.employee_first_name%> <%= employee.employee_last_name%></td>
+                <td><%= employee.role.role_name %></td>
+                <td><a href="./employee/edit/<%=employee.id%>">Edit</a> | <a href="./employee/delete/<%=employee.id%>">Delete</a></td>
+            </tr>
+        <% }) %>     
+    </table>
+    <a href="../">Back To Home</a>
+    
+</body>
+</html>

@@ -9,10 +9,18 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       lae_issue_id: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'issues',
+          key: 'id'
+        }
       },
       lae_employee_id: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'employees',
+          key: 'id'
+        }
       },
       createdAt: {
         allowNull: false,

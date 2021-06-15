@@ -9,9 +9,6 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate(models) {
-      // define association here
-    }
   };
   employees.init({
     employee_username: DataTypes.STRING,
@@ -23,5 +20,8 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'employees',
   });
+  employees.associate =function(models){
+    employees.belongsTo(models.roles, {foreignKey:'employee_role_id'})
+  }
   return employees;
 };
