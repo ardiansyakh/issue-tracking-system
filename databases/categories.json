@@ -1,14 +1,14 @@
 [
     {
-        "category_name": "HRSYS"
+        "category_name": "Modul HR"
     },
     {
-        "category_name": "GASYS"
+        "category_name": "Modul Sales"
     },
     {
-        "category_name": "OPSYS"
+        "category_name": "Modul Procurement"
     },
     {
-        "category_name": "FINSYS"
+        "category_name": "Modul Finance"
     }
 ]

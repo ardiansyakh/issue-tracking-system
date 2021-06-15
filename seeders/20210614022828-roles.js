@@ -1,8 +1,8 @@
 'use strict';
 const fs = require('fs')
-let roles = JSON.parse(fs.readFileSync('./databases/roles.json', {encoding: 'utf-8'}))
-roles = roles.map(role=>{
-  return{
+let roles = JSON.parse(fs.readFileSync('./databases/roles.json', { encoding: 'utf-8' }))
+roles = roles.map(role => {
+  return {
     ...role,
     createdAt: new Date(),
     updatedAt: new Date()
