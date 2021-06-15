@@ -1,18 +1,18 @@
 'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('attachments', {
+    await queryInterface.createTable('log_assignment_employees', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      attachment_file_name: {
-        type: Sequelize.STRING
+      lae_issue_id: {
+        type: Sequelize.INTEGER
       },
-      attachment_file_type: {
-        type: Sequelize.STRING
+      lae_employee_id: {
+        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,
@@ -25,6 +25,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('attachments');
+    await queryInterface.dropTable('log_assignment_employees');
   }
 };

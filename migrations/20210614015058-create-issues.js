@@ -29,13 +29,6 @@ module.exports = {
       issue_deadline: {
         type: Sequelize.DATE
       },
-      issue_employee_id: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'employees',
-          key: 'id'
-        }
-      },
       issue_category_id: {
         type: Sequelize.INTEGER,
         references: {

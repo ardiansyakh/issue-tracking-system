@@ -1,24 +1,23 @@
 'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('issue_attachments', {
+    await queryInterface.createTable('attachments', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      ia_issue_id: {
+      attachment_file_name: {
+        type: Sequelize.STRING
+      },
+      attachment_file_type: {
+        type: Sequelize.STRING
+      },
+      attachment_issue_id: {
         type: Sequelize.INTEGER,
         references: {
           model: 'issues',
-          key: 'id'
-        }
-      },
-      ia_attachment_id: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'attachments',
           key: 'id'
         }
       },
@@ -33,6 +32,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('issue_attachments');
+    await queryInterface.dropTable('attachments');
   }
 };
