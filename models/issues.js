@@ -3,7 +3,7 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class issues extends Model {
+  class issue extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -13,18 +13,28 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   };
-  issues.init({
-    issues_user_client_name: DataTypes.STRING,
-    issues_user_client_email: DataTypes.STRING,
-    issues_subject: DataTypes.STRING,
-    issues_desc: DataTypes.STRING,
-    issues_priority: DataTypes.STRING,
-    issues_status: DataTypes.STRING,
-    issues_deadline: DataTypes.DATE,
-    issues_category_id: DataTypes.INTEGER,
+  issue.init({
+    issue_user_client_name: DataTypes.STRING,
+    issue_user_client_email: DataTypes.STRING,
+    issue_subject: DataTypes.STRING,
+    issue_desc: DataTypes.STRING,
+    issue_priority: DataTypes.STRING,
+    issue_status: DataTypes.STRING,
+    issue_deadline: DataTypes.DATE,
+    issue_category_id: DataTypes.INTEGER,
+    issue_solved_by: DataTypes.INTEGER,
   }, {
     sequelize,
-    modelName: 'issues',
+    modelName: 'issue',
   });
-  return issues;
+
+  issue.associate = function (models) {
+    issue.hasMany(models.attachment, { foreignKey: 'attachment_issue_id' })
+    issue.hasMany(models.assignment, { foreignKey: 'assignment_issue_id' })
+    issue.belongsTo(models.category, { foreignKey: 'issue_category_id' })
+    issue.belongsTo(models.employee, { foreignKey: 'issue_solved_by' })
+  }
+
+
+  return issue;
 };
