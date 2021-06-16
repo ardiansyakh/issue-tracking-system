@@ -9,9 +9,6 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate(models) {
-      // define association here
-    }
   };
   employee.init({
     employee_username: DataTypes.STRING,
@@ -23,6 +20,12 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'employee',
   });
+<<<<<<< HEAD
+  employees.associate =function(models){
+    employees.belongsTo(models.roles, {foreignKey:'employee_role_id'})
+  }
+  return employees;
+=======
 
   employee.associate = function (models) {
     employee.belongsTo(models.role, { foreignKey: 'employee_role_id' })
@@ -31,4 +34,5 @@ module.exports = (sequelize, DataTypes) => {
   }
 
   return employee;
+>>>>>>> master
 };
