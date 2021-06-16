@@ -1,9 +1,9 @@
 'use strict';
 const fs = require('fs')
-let employees = JSON.parse(fs.readFileSync('./databases/employees.json', {encoding:'utf-8'}))
+let employees = JSON.parse(fs.readFileSync('./databases/employees.json', { encoding: 'utf-8' }))
 
-employees = employees.map(employee =>{
-  return{
+employees = employees.map(employee => {
+  return {
     ...employee,
     createdAt: new Date(),
     updatedAt: new Date()

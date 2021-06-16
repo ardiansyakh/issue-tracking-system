@@ -1,12 +1,15 @@
 const express = require('express')
-const router = require('./routers')
 const app = express()
-const PORT = 3000
+const port = 3000
+const router = require('./routers/router')
+const path = require('path')
 
 app.set('view engine', 'ejs')
 app.use(express.urlencoded({ extended: true }))
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(router)
 
-app.listen(PORT, () => {
-    console.log(`app listen on *:${PORT}`);
+
+app.listen(port, () => {
+    console.log(`listening to port ${port} ...`);
 })
