@@ -8,7 +8,7 @@
 </head>
 <body>
     <h2>Employee Detail</h2>
-    <form action="/employee/edit/<%=data.id%>" method="POST">
+    <form action="/employees/edit/<%=data.id%>" method="POST">
     <label for="employee_username">Username:</label><br>
         <input type="text" id="employee_username" name="employee_username" value="<%= data.employee_username %>"><br>
     <label for="password">Password:</label><br>
@@ -17,11 +17,11 @@
         <input type="text" id="employee_first_name" name="employee_first_name" value="<%= data.employee_first_name %>"><br>
     <label for="employee_last_name">Last Name:</label><br>
         <input type="text" id="employee_last_name" name="employee_last_name" value="<%= data.employee_last_name %>"><br>
-    <label for="role">Production House:</label><br>
+    <label for="role">Role:</label><br>
         <select id="employee_role_id" name="employee_role_id">
             <option disabled>Select</option>
             <option selected value="<%= data.role.id %>"><%= data.role.role_name %></option>
-            <% role.forEach(res =>{%>
+            <% roles.forEach(res =>{%>
                 <%if(res.id !== data.employee_role_id){%>
                     <option value="<%= res.id %>"><%= res.role_name %></option>
                 <%}%>
@@ -29,6 +29,6 @@
         </select><br>
     <input type="submit" value="Submit">
     </form> 
-    <p><a href="/employee">Back to List Employee</a></p>
+    <p><a href="/employees">Back to List Employee</a></p>
 </body>
 </html>

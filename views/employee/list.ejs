@@ -12,7 +12,7 @@
         <h2><%= notif %></h2>
     <% } %> 
 
-    <a href="/employee/add">Add Employee</a>
+    <a href="/employees/add">Add Employee</a>
     <table border="1">
         <tr>
             <td>Username</td>
@@ -25,11 +25,11 @@
                 <td><%= employee.employee_username%></td>
                 <td><%= employee.employee_first_name%> <%= employee.employee_last_name%></td>
                 <td><%= employee.role.role_name %></td>
-                <td><a href="./employee/edit/<%=employee.id%>">Edit</a> | <a href="./employee/delete/<%=employee.id%>">Delete</a></td>
+                <td><a href="./employees/edit/<%=employee.id%>">Edit</a> | <a href="./employees/delete/<%=employee.id%>" onclick="return confirm('Are you sure want to delete?');">Delete</a></td>
             </tr>
         <% }) %>     
     </table>
-    <a href="../">Back To Home</a>
+    <a href="..">Back To Home</a>
     
 </body>
 </html>
