@@ -22,22 +22,16 @@ class LoginController{
 
                     res.redirect('/issues')
                 }else{
-                    let err = new Error('Invalid username/password')
-                    err.name = 'invalidEmailPassword'
-                    throw err
+                    const notif = 'Invalid Email/Password'
+                    res.redirect(`/login?notif=${notif}`)
                 }
             }else{
-                let err = new Error('Invalid username/password')
-                err.name = 'invalidEmailPassword'
-                throw err
+                const notif = 'Invalid Email/Password'
+                res.redirect(`/login?notif=${notif}`)
             }
         })
         .catch(err=>{
-            if (err.name = 'invalidEmailPassword') {
-                res.send(err.message)
-            } else {
-                res.send(err)
-            }
+            res.send(err)
         })
     }
     static logout(req, res){

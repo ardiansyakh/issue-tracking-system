@@ -21,7 +21,7 @@
 
     <!-- Main Content -->
     <div class="w3-container w3-light-grey" style="padding:128px 16px" id="student">
-        <h3 class="w3-center"> CATEGORY </h3>
+        <h3 class="w3-center"> Employee </h3>
         <br>
 
         <div class="container">
@@ -32,7 +32,7 @@
                         <div class="alert alert-success" role="alert">
                             <%= notif %>
                         </div>
-                        <% } %>
+                    <% } %>
                 </div>
                 <div class="col-sm-1"></div>
             </div>
@@ -42,11 +42,27 @@
             <div class="row">
                 <div class="col-1"></div>
                 <div class="col-5">
-                    <h4 class="w3-center">Add New Category</h4>
+                    <h4 class="w3-center">Add New Employee</h4>
 
-                    <form action="/categories" method="post">
-                        <p><input class="w3-input w3-border" type="text" placeholder="Input category" required
-                                name="category_name"></p>
+                    <form action="/employees/add" method="post">
+                        <p><input class="w3-input w3-border" type="text" placeholder="Input Username" required
+                                name="employee_username"></p>
+                        <p>
+                        <p><input class="w3-input w3-border" type="password" placeholder="Input Password" required
+                                name="employee_password"></p>
+                        <p>
+                        <p><input class="w3-input w3-border" type="text" placeholder="Input First Name" required
+                                name="employee_first_name"></p>
+                        <p>
+                        <p><input class="w3-input w3-border" type="text" placeholder="Input Last Name" required
+                                name="employee_last_name"></p>
+                        <p>
+                        <p><select id="employee_role_id" name="employee_role_id">
+                                <option disabled selected>Select</option>
+                                <% roles.forEach(res =>{%>
+                                        <option value="<%= res.id %>"><%= res.role_name %></option>
+                                <% }) %>     
+                            </select><br></p>
                         <p>
                             <a class="w3-button w3-blue" href="/"><i class="fa fa-undo"></i>
                                 BACK</a>
@@ -57,14 +73,14 @@
                     </form>
                 </div>
 
-
                 <div class="col-6">
-                    <h4 class="w3-center">List Category</h4><br>
+                    <h4 class="w3-center">List Employee</h4><br>
 
                     <table class="table table-hover align-items-center">
                         <thead class="text-center">
                             <tr>
-                                <th scope="col" class="text-center">Category Name</th>
+                                <th scope="col" class="text-center">Employee Name</th>
+                                <th scope="col" class="text-center">Role</th>
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
@@ -73,13 +89,16 @@
                             <% data.forEach(el=> {%>
                                 <tr>
                                     <td class="text-center">
-                                        <%= el.category_name %>
+                                        <%= el.fullName %>
+                                    </td>
+                                    <td class="text-center">
+                                        <%= el.role.role_name %>
                                     </td>
                                     <td class="d-flex align-items-center justify-content-start">
                                         <a class="m-1 btn btn-warning" data-toggle="tooltip" title="Edit"
-                                            href="/categories/edit/<%= el.id %>"><i class="fa fa-edit"></i></a>
+                                            href="/employees/edit/<%=el.id%>"><i class="fa fa-edit"></i></a>
                                         <a class="m-1 btn btn-danger" data-toggle="tooltip" title="Delete"
-                                            href="/categories/delete/<%= el.id %>"><i class="fa fa-trash"></i></a>
+                                            href="/employees/delete/<%=el.id%>"><i class="fa fa-trash"></i></a>
                                     </td>
                                 </tr>
                                 <% }) %>

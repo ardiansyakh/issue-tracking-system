@@ -21,19 +21,13 @@
 
     <!-- Main Content -->
     <div class="w3-container w3-light-grey" style="padding:128px 16px" id="student">
-        <h3 class="w3-center"> CATEGORY </h3>
+        <h3 class="w3-center"> EDIT EMPLOYEE </h3>
         <br>
 
         <div class="container">
             <div class="row">
                 <div class="col-sm-1"></div>
-                <div class="col-sm-10">
-                    <% if(notif) { %>
-                        <div class="alert alert-success" role="alert">
-                            <%= notif %>
-                        </div>
-                        <% } %>
-                </div>
+                <div class="col-sm-10"></div>
                 <div class="col-sm-1"></div>
             </div>
         </div>
@@ -42,13 +36,30 @@
             <div class="row">
                 <div class="col-1"></div>
                 <div class="col-5">
-                    <h4 class="w3-center">Add New Category</h4>
-
-                    <form action="/categories" method="post">
-                        <p><input class="w3-input w3-border" type="text" placeholder="Input category" required
-                                name="category_name"></p>
+                    <form action="/employees/edit/<%=data.id%>" method="post">
+                        <p><input class="w3-input w3-border" type="text" 
+                                value="<%= data.employee_username %>" name="employee_username" placeholder="Input Username" required></p>
                         <p>
-                            <a class="w3-button w3-blue" href="/"><i class="fa fa-undo"></i>
+                        <p><input class="w3-input w3-border" type="password" 
+                                value="<%= data.employee_password %>" name="employee_password" placeholder="Input Password"required></p>
+                        <p>
+                        <p><input class="w3-input w3-border" type="text" 
+                                value="<%= data.employee_first_name %>" name="employee_first_name" placeholder="Input First Name"required></p>
+                        <p>
+                        <p><input class="w3-input w3-border" type="text" 
+                                value="<%= data.employee_last_name %>" name="employee_last_name" placeholder="Input Last Name"required></p>
+                        <p>
+                        <p> <select id="employee_role_id" name="employee_role_id">
+                                <option disabled>Select</option>
+                                <option selected value="<%= data.role.id %>"><%= data.role.role_name %></option>
+                                <% roles.forEach(res =>{%>
+                                    <%if(res.id !== data.employee_role_id){%>
+                                        <option value="<%= res.id %>"><%= res.role_name %></option>
+                                    <%}%>
+                                <% }) %>     
+                            </select></p>
+                        <p>
+                            <a class="w3-button w3-blue" href="/employees"><i class="fa fa-undo"></i>
                                 BACK</a>
                             <button class="w3-button w3-green" type="submit">
                                 <i class="fa fa-paper-plane"></i> SUBMIT
@@ -57,38 +68,8 @@
                     </form>
                 </div>
 
-
-                <div class="col-6">
-                    <h4 class="w3-center">List Category</h4><br>
-
-                    <table class="table table-hover align-items-center">
-                        <thead class="text-center">
-                            <tr>
-                                <th scope="col" class="text-center">Category Name</th>
-                                <th scope="col">Action</th>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                            <% data.forEach(el=> {%>
-                                <tr>
-                                    <td class="text-center">
-                                        <%= el.category_name %>
-                                    </td>
-                                    <td class="d-flex align-items-center justify-content-start">
-                                        <a class="m-1 btn btn-warning" data-toggle="tooltip" title="Edit"
-                                            href="/categories/edit/<%= el.id %>"><i class="fa fa-edit"></i></a>
-                                        <a class="m-1 btn btn-danger" data-toggle="tooltip" title="Delete"
-                                            href="/categories/delete/<%= el.id %>"><i class="fa fa-trash"></i></a>
-                                    </td>
-                                </tr>
-                                <% }) %>
-                        </tbody>
-                    </table>
-                </div>
-
+                <div class="col-6"> </div>
             </div>
-
         </div>
     </div>
 

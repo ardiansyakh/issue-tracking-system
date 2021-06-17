@@ -1,25 +1,90 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ISM - Login</title>
-</head>
-<body>
-    <% if (notif) { %>
-      <%= notif %> 
-  <% } %> 
+<html>
+<title>Issue Tracking System</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script data-require="jquery@*" data-semver="2.0.3" src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+<script data-require="bootstrap@*" data-semver="3.1.1"
+    src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<link data-require="bootstrap-css@3.1.1" data-semver="3.1.1" rel="stylesheet"
+    href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />
+<link rel="stylesheet" href="css/styles.css">
 
-    <h2>Login</h2>
-    <form action="/login" method="POST">
-    <label for="employee_username">Username:</label><br>
-        <input type="text" id="employee_username" name="employee_username" placeholder="Username"><br>
-    <label for="password">Password:</label><br>
-        <input type="password" id="employee_password" name="employee_password" placeholder="Password"><br>
-    
-    <input type="submit" value="Login">
-    </form> 
-    <p><a href="..">Back to Home</a></p>
+<body id="top_page">
+    <!--Top Navigation Bar-->
+    <%- include('nav') %>
+
+    <!-- Main Content -->
+    <div class="w3-container w3-light-grey" style="padding:128px 16px" id="student">
+        <br>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-5">
+                    <h4 class="w3-center">Login</h4>
+                    <div class="col-sm-10">
+                        <% if(notif) { %>
+                            <div class="alert alert-danger" role="alert">
+                                <%= notif %>
+                            </div>
+                        <% } %>
+                    </div>
+                    
+                    <form action="/login" method="post">
+                        <p><input class="w3-input w3-border" type="text" placeholder="Input Username" required
+                                name="employee_username"></p>
+                        <p>
+                        <p><input class="w3-input w3-border" type="password" placeholder="Input Password" required
+                                name="employee_password"></p>
+                        <p>
+                            <a class="w3-button w3-blue" href="/"><i class="fa fa-undo"></i>
+                                BACK</a>
+                            <button class="w3-button w3-green" type="submit">
+                                <i class="fa fa-paper-plane"></i> SUBMIT
+                            </button>
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Footer -->
+    <footer class="w3-center w3-black w3-padding-16">
+        <a href="#top_page" class="w3-button w3-light-grey"><i class="fa fa-arrow-up w3-margin-right"></i>To the top</a>
+        <div class="w3-xlarge w3-section">
+            <i class="fa fa-facebook-official w3-hover-opacity"></i>
+            <i class="fa fa-instagram w3-hover-opacity"></i>
+            <i class="fa fa-twitter w3-hover-opacity"></i>
+            <i class="fa fa-linkedin w3-hover-opacity"></i>
+        </div>
+        <p class="w3-hover-text-green">Abdullah & Gulis - 2021</p>
+    </footer>
+
+    <script>
+        // Toggle between showing and hiding the sidebar when clicking the menu icon
+        var mySidebar = document.getElementById("mySidebar");
+
+        function w3_open() {
+            if (mySidebar.style.display === 'block') {
+                mySidebar.style.display = 'none';
+            } else {
+                mySidebar.style.display = 'block';
+            }
+        }
+
+        // Close the sidebar with the close button
+        function w3_close() {
+            mySidebar.style.display = "none";
+        }
+    </script>
+
 </body>
+
 </html>
