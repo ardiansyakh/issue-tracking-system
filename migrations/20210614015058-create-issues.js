@@ -14,6 +14,10 @@ module.exports = {
       issue_user_client_email: {
         type: Sequelize.STRING
       },
+      issue_ticket_number: {
+        type: Sequelize.STRING,
+        unique: true
+      },
       issue_subject: {
         type: Sequelize.STRING
       },
@@ -42,6 +46,9 @@ module.exports = {
           model: 'employees',
           key: 'id'
         }
+      },
+      issue_attachment_filename: {
+        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,

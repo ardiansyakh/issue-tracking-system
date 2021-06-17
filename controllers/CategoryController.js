@@ -14,9 +14,9 @@ class CategoryController {
     }
 
     static listCategoryPost(req, res) {
-        const { category_name } = req.body
+        const { category_name, category_initial } = req.body
 
-        category.create({ category_name })
+        category.create({ category_name, category_initial })
             .then(result => {
                 //console.log(result);
                 let notif = `Successfully added category "${result.dataValues.category_name}"`
@@ -46,10 +46,10 @@ class CategoryController {
 
     static editCategoryPost(req, res) {
         const { id } = req.params
-        const { category_name } = req.body
+        const { category_name, category_initial } = req.body
 
         category.update(
-            { category_name },
+            { category_name, category_initial },
             {
                 where: { id: +id },
                 returning: true
