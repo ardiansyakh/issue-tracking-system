@@ -4,13 +4,20 @@
         "employee_password": 12345678,
         "employee_first_name": "Abdullah",
         "employee_last_name": "Ardiansyah",
-        "employee_role_id":2
+        "employee_role_id": 2
     },
     {
         "employee_username": "gulis",
         "employee_password": 12345678,
         "employee_first_name": "Gulistiani",
         "employee_last_name": "Fuzuli",
-        "employee_role_id":1
+        "employee_role_id": 1
+    },
+    {
+        "employee_username": "cecep",
+        "employee_password": 12345678,
+        "employee_first_name": "Cecep",
+        "employee_last_name": "Gorbacep",
+        "employee_role_id": 2
     }
 ]

@@ -1,0 +1,112 @@
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+   font-family: "Raleway", sans-serif
+}
+
+.openissue {
+   margin: 0;
+   position: absolute;
+   top: 85%;
+   left: 30%;
+   -ms-transform: translateY(-50%);
+   transform: translateY(-50%);
+   justify-content: center;
+ }
+
+ .viewissue {
+   margin: 0;
+   position: absolute;
+   top: 85%;
+   left: 55%;
+   -ms-transform: translateY(-50%);
+   transform: translateY(-50%);
+   justify-content: center;
+ }
+
+body,
+html {
+   height: 100%;
+   line-height: 1.8;
+}
+
+/* Full height image header */
+.bgimg-1 {
+   background-position: center;
+   background-size: cover;
+   background-image: url("../assets/img/support.jpg");
+   min-height: 100%;
+}
+
+.w3-bar .w3-button {
+   padding: 16px;
+}
+
+#customers {
+   font-family: Arial, Helvetica, sans-serif;
+   border-collapse: collapse;
+   width: 100%;
+}
+
+#customers td,
+#customers th {
+   border: 1px solid #ddd;
+   padding: 8px;
+}
+
+#customers tr:nth-child(even) {
+   background-color: #f2f2f2;
+}
+
+#customers tr:hover {
+   background-color: #ddd;
+}
+
+#customers th {
+   padding-top: 12px;
+   padding-bottom: 12px;
+   text-align: left;
+   background-color: #828685;
+   color: white;
+}
+
+input[type=text],
+select {
+   width: 100%;
+   padding: 12px 20px;
+   margin: 8px 0;
+   display: inline-block;
+   border: 1px solid #ccc;
+   border-radius: 4px;
+   box-sizing: border-box;
+}
+
+input[type=email],
+select {
+   width: 100%;
+   padding: 12px 20px;
+   margin: 8px 0;
+   display: inline-block;
+   border: 1px solid #ccc;
+   border-radius: 4px;
+   box-sizing: border-box;
+}
+
+input[type=submit] {
+   width: 100%;
+   background-color: #828685;
+   color: white;
+   padding: 14px 20px;
+   margin: 8px 0;
+   border: none;
+   border-radius: 4px;
+   cursor: pointer;
+}
+
+input[type=submit]:hover {
+   background-color: #595c5b;
+}

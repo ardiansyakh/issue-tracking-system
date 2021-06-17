@@ -36,6 +36,13 @@ module.exports = {
           key: 'id'
         }
       },
+      issue_solved_by: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'employees',
+          key: 'id'
+        }
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
