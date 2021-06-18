@@ -35,7 +35,6 @@ class IssueController {
     static trackIssueUserPost(req, res) {
         let { issue_user_client_email } = req.body
         let { notif, email } = req.query
-        console.log(email);
 
         issue_user_client_email = issue_user_client_email ? issue_user_client_email : email
 
@@ -91,13 +90,31 @@ class IssueController {
 
     static detailIssueUser(req, res) {
         let { id } = req.params
-        let session = req.session.employee_username
         issue.findOne({
-            include: category,
-            where: { id: +id }
+            where: {
+                id: +id
+            },
+            include: [
+                {
+                    model: assignment,
+                    include: [
+                        {
+                            model: employee
+                        }],
+                    required: false
+                },
+                {
+                    model: category
+                }
+            ],
+            required: false,
+            order: [
+                ['id', 'DESC'],
+            ]
         })
             .then(result => {
-                res.render('viewIssueUser', { data: result, moment: moment, session })
+                //res.send(result)
+                res.render('viewIssueUser', { data: result, moment: moment })
             })
             .catch(err => {
                 res.send(err)
@@ -164,13 +181,12 @@ class IssueController {
                         issue_ticket_number = result.issue_ticket_number
                         const index = Math.round(Math.random()*employees.length)
                         const assignment_employee_id = employees[index].id
-                        console.log(assignment_employee_id);
                         return assignment.create({assignment_issue_id: result.id, assignment_employee_id})
                     })
 
                     .then(result=>{
                         let notif = `Successfully created issue with ticket number "${issue_ticket_number}"`
-                        res.redirect(`/issues/issueUser?notif=${notif}`)
+                        res.redirect(`/issues/issueUser/track?notif=${notif}`)
                     })
 
                     .catch(err => {
@@ -181,13 +197,6 @@ class IssueController {
         })
     }
 
-
-    static editIssueUser(req, res) {
-
-    }
-    static editIssueUserPost(req, res) {
-
-    }
 
     static listIssue(req, res) {
         let { notif } = req.query
@@ -227,37 +236,82 @@ class IssueController {
     }
 
     static editIssue(req, res) {
-        // const { id } = req.params
-        // let { notif } = req.query
-
-        // Issue.findOne({
-        //     where: { id: +id }
-        // })
-        //     .then((result) => {
-        //         res.render('editIssue', { data: result, notif: notif })
-        //     })
-        //     .catch(err => {
-        //         res.send(err)
-        //     })
+        let { id } = req.params
+        const {notif} = req.query
+        const status = ['Open', 'On Progress', 'Resolve', 'Reject']
+        let categories
+        let employees
+        category.findAll()
+        .then(result=>{
+            categories = result
+            return employee.findAll()
+        })
+        .then(result=>{
+            employees = result
+            return issue.findOne({
+                where: {
+                    id: +id
+                },
+                include: [
+                    {
+                        model: assignment,
+                        include: [
+                            {
+                                model: employee
+                            }],
+                        required: false
+                    },
+                    {
+                        model: category
+                    }
+                ],
+                required: false,
+                order: [
+                    ['id', 'DESC'],
+                ]
+            })
+        })
+        .then(result => {
+            res.render('editIssue', { data: result, moment: moment, employees, categories, status, notif})
+        })
+        .catch(err => {
+            res.send(err)
+        })
     }
 
     static editIssuePost(req, res) {
-        // const { id } = req.params
-        // const { Issue_name } = req.body
+        const { id } = req.params
+        const {issue_category, issue_status, assignment_employee_id} = req.body
+        let employee_id_before = false
 
-        // Issue.update(
-        //     { Issue_name },
-        //     {
-        //         where: { id: +id },
-        //         returning: true
-        //     })
-        //     .then(result => {
-        //         let notif = `Successfully updated issue "${result[1][0].dataValues.Issue_name}"`
-        //         res.redirect(`/categories?notif=${notif}`)
-        //     })
-        //     .catch(err => {
-        //         res.send(err)
-        //     })
+        issue.update({issue_category, issue_status},{
+            where: {id:+id},
+            returning: true
+        })
+        .then(result=>{
+            return assignment.findAll({
+                where: {assignment_issue_id: id}
+            })
+        })
+        .then(result=>{
+            return result.forEach(assignment => {
+                if(assignment.assignment_employee_id === +assignment_employee_id){
+                    employee_id_before = true
+                }
+            });
+        })
+        .then(result=>{
+            if(!employee_id_before){
+                return assignment.create ({assignment_issue_id: +id, assignment_employee_id})
+            }
+        })
+        .then(result=>{
+            const notif = 'Success Update'
+            res.redirect(`/issues/edit/${id}?notif=${notif}`)
+        })
+        .catch(err=>{
+            res.send(err)
+        })
     }
 
     static deleteIssue(req, res) {

@@ -103,7 +103,7 @@
                         <div class="col-sm-8">
                             <% data.assignments.forEach(el=> {%>
                                 <input type="text" class="form-control"
-                                    value="<%= el.employee.employee_first_name %> <%= el.employee.employee_last_name %>"
+                                    value="<%= el.employee.fullName %>"
                                     disabled>
                                 <% }) %>
                         </div>
