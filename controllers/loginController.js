@@ -20,7 +20,7 @@ class LoginController{
                     req.session.employee_username = result.employee_username
                     req.session.employee_role_id = result.employee_role_id
 
-                    res.redirect('/issues')
+                    res.redirect('/')
                 }else{
                     const notif = 'Invalid Email/Password'
                     res.redirect(`/login?notif=${notif}`)

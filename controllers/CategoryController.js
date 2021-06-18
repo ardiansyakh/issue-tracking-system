@@ -18,7 +18,6 @@ class CategoryController {
 
         category.create({ category_name, category_initial })
             .then(result => {
-                //console.log(result);
                 let notif = `Successfully added category "${result.dataValues.category_name}"`
                 res.redirect(`/categories?notif=${notif}`)
             })

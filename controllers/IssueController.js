@@ -1,10 +1,11 @@
-const { issue, category } = require('../models')
+const { issue, category, employee, assignment } = require('../models')
 const generateRandomString = require('../helpers/generateRandomString')
 const checkFileType = require('../helpers/checkFileType')
 
 const moment = require('moment')
 const multer = require('multer')
 const path = require('path')
+const assignments = require('../models/assignments')
 
 
 //set storage engine
@@ -47,7 +48,8 @@ class IssueController {
 
     static detailIssueUser(req, res) {
         let { id } = req.params
-
+        let session = req.session.employee_username
+        console.log(session);
         issue.findOne({
             include: category,
             where: { id: +id }
@@ -90,35 +92,49 @@ class IssueController {
             if (err) {
                 res.render('index', { msg: err })
             } else {
-                const { issue_user_client_name, issue_user_client_email, issue_subject, issue_category, issue_desc, myFile } = req.body
+                if (req.file === undefined) {    //untuk handle file kosong tidak dipilih
+                    res.render('addIssueUser', { category: result, notif: 'Error: No file selected' })
+                } else {
+                    const { issue_user_client_name, issue_user_client_email, issue_subject, issue_category, issue_desc, myFile } = req.body
+                    let issue_category_id = issue_category
+                    let issue_status = 'Open'
+                    let issue_ticket_number = generateRandomString(8)
+                    let issue_attachment_filename = req.file.filename
 
-                category.findAll()
+                    let categories
+                    let employees
+
+                    category.findAll()
                     .then(result => {
-                        let issue_category_id = issue_category
-                        let issue_status = 'Open'
-                        let issue_ticket_number = generateRandomString(8)
-                        let issue_attachment_filename = req.file.filename
-
-                        if (req.file === undefined) {    //untuk handle file kosong tidak dipilih
-                            res.render('addIssueUser', { category: result, notif: 'Error: No file selected' })
-                        } else {
-                            issue.create({
-                                issue_user_client_name, issue_user_client_email, issue_subject, issue_desc,
-                                issue_status, issue_ticket_number, issue_attachment_filename, issue_category_id
-                            })
-                                .then(result2 => {
-                                    //res.send(result2)
-                                    let notif = `Successfully created issue with ticket number "${result2.dataValues.issue_ticket_number}"`
-                                    res.redirect(`/issues/issueUser?notif=${notif}`)
-                                })
-                                .catch(err => {
-                                    res.send(err)
-                                })
-                        }
+                        categories = result
+                        return employee.findAll()
                     })
+
+                    .then(result=>{
+                        employees = result
+                        return issue.create({
+                            issue_user_client_name, issue_user_client_email, issue_subject, issue_desc,
+                            issue_status, issue_ticket_number, issue_attachment_filename, issue_category_id
+                        })
+                    })
+
+                    .then(result => {
+                        issue_ticket_number = result.issue_ticket_number
+                        const index = Math.round(Math.random()*employees.length)
+                        const assignment_employee_id = employees[index].id
+                        console.log(assignment_employee_id);
+                        return assignment.create({assignment_issue_id: result.id, assignment_employee_id})
+                    })
+
+                    .then(result=>{
+                        let notif = `Successfully created issue with ticket number "${issue_ticket_number}"`
+                        res.redirect(`/issues/issueUser?notif=${notif}`)
+                    })
+
                     .catch(err => {
                         res.send(err)
                     })
+                }
             }
         })
     }
@@ -132,15 +148,28 @@ class IssueController {
     }
 
     static listIssue(req, res) {
-        // let { notif } = req.query
+        let { notif } = req.query
 
-        // Issue.findAll()
-        //     .then(result => {
-        //         res.render('Issue', { data: result, notif: notif })
-        //     })
-        //     .catch(err => {
-        //         res.send(err)
-        //     })
+        issue.findAll({
+            include: [category, 
+                {model: assignment,
+                    include: [{
+                        model: employee,
+                        attributes: ['employee_first_name']
+                    }]
+                }
+            ],
+            order: [
+                ['id', 'DESC'],
+            ]
+        })
+        .then(result => {
+            console.log(result[0].assignments[0].employee.employee_first_name)
+            res.render('listIssue', { data: result, notif: notif, moment: moment })
+        })
+        .catch(err => {
+            res.send(err)
+        })
     }
 
     static listIssuePost(req, res) {

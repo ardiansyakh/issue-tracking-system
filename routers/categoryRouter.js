@@ -1,6 +1,6 @@
 const router = require('express').Router()
 const CategoryController = require('../controllers/CategoryController')
-const checkSessionAuth = require('../helper/checkSessionAuth')
+const checkSessionAuth = require('../helpers/checkSessionAuth')
 
 router.get('/', checkSessionAuth, CategoryController.listCategory)
 router.post('/', checkSessionAuth, CategoryController.listCategoryPost)
