@@ -74,21 +74,21 @@
 
         <div class="container">
             <div class="row">
-                <div class="col-1"></div>
-                <div class="col-10">
+
+                <div class="col-12">
                     <form action="/issues/issueUser/add" method="post" enctype="multipart/form-data">
                         <div class="form-group row">
-                            <label for="issue_user_client_name" class="col-sm-2 col-form-label">Contact
+                            <label for="issue_user_client_name" class="col-sm-4 col-form-label">Contact
                                 Name</label>
-                            <div class="col-sm-10">
+                            <div class="col-sm-8">
                                 <input type="text" class="form-control" name="issue_user_client_name"
                                     placeholder="Input your name" required>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="issue_user_client_email" class="col-sm-2 col-form-label">Contact
+                            <label for="issue_user_client_email" class="col-sm-4 col-form-label">Contact
                                 Email</label>
-                            <div class="col-sm-10">
+                            <div class="col-sm-8">
                                 <input type="email" class="form-control" name="issue_user_client_email"
                                     id="issue_user_client_email" placeholder="Input your email address" required>
                             </div>
@@ -96,8 +96,8 @@
                         <hr>
                         <hr>
                         <div class="form-group row">
-                            <label for="issue_subject" class="col-sm-2 col-form-label">Subject</label>
-                            <div class="col-sm-10">
+                            <label for="issue_subject" class="col-sm-4 col-form-label">Subject</label>
+                            <div class="col-sm-8">
                                 <input type="text" class="form-control" name="issue_subject" id="issue_subject"
                                     placeholder="Input issue subject" required>
                             </div>
@@ -108,8 +108,8 @@
 
 
                         <div class="form-group row">
-                            <label for="issue_category" class="col-sm-2 col-form-label">Category</label>
-                            <div class="col-sm-10">
+                            <label for="issue_category" class="col-sm-4 col-form-label">Category</label>
+                            <div class="col-sm-8">
                                 <select name="issue_category" id="issue_category" class="form-control">
                                     <option default selected>--Select Category--</option>
                                     <% category.forEach(el=> {%>
@@ -121,8 +121,8 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="issue_desc" class="col-sm-2 col-form-label">Description</label>
-                            <div class="col-sm-10">
+                            <label for="issue_desc" class="col-sm-4 col-form-label">Description</label>
+                            <div class="col-sm-8">
                                 <textarea rows="10" cols="50" class="form-control" name="issue_desc" id="issue_desc"
                                     placeholder="Input detail of the problem encountered" required>   </textarea>
                             </div>
@@ -156,10 +156,11 @@
 
                     <img src="<%= typeof file !='undefined' ? file : '' %>" class="responsive-img">
                 </div>
-                <div class="col-1"> </div>
+
             </div>
         </div>
     </div>
+
 
     <!-- Footer -->
     <footer class="w3-center w3-black w3-padding-16">
