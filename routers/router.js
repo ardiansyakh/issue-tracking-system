@@ -7,6 +7,7 @@ const loginRouter = require('./loginRouter')
 const HomeController = require('../controllers/HomeController')
 const LoginController = require('../controllers/loginController')
 const checkSession = require('../helpers/checkSession')
+const checkSessionAuth = require('../helpers/checkSessionAuth')
 
 router.get('/', HomeController.home)
 router.use('/roles', checkSession, roleRouter)
@@ -15,5 +16,6 @@ router.use('/employees',checkSession, employeeRouter)
 router.use('/issues', issueRouter)
 router.use('/login', loginRouter)
 router.use('/logout',checkSession, LoginController.logout)
+router.get('/dashboard', checkSession, checkSessionAuth, HomeController.dashboard)
 
 module.exports = router
