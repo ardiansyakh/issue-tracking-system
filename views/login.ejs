@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ISM - Login</title>
+</head>
+<body>
+    <% if (notif) { %>
+      <%= notif %> 
+  <% } %> 
+
+    <h2>Login</h2>
+    <form action="/login" method="POST">
+    <label for="employee_username">Username:</label><br>
+        <input type="text" id="employee_username" name="employee_username" placeholder="Username"><br>
+    <label for="password">Password:</label><br>
+        <input type="password" id="employee_password" name="employee_password" placeholder="Password"><br>
+    
+    <input type="submit" value="Login">
+    </form> 
+    <p><a href="..">Back to Home</a></p>
+</body>
+</html>
