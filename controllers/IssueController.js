@@ -27,6 +27,7 @@ const upload = multer({
 
 
 class IssueController {
+    //issue user
     static trackIssueUser(req, res) {
         let { notif, email } = req.query
         res.render('trackIssueUser', { notif: notif, email: email })
@@ -198,9 +199,11 @@ class IssueController {
     }
 
 
+    //issue employee
     static listIssue(req, res) {
         let { notif } = req.query
         issue.findAll({
+            order: [ ['id', 'DESC'], [assignment, 'id', 'DESC'], ],
             include: [category, 
                 {model: assignment,
                     include: [{
@@ -208,9 +211,6 @@ class IssueController {
                         attributes: ['employee_first_name']
                     }]
                 }
-            ],
-            order: [
-                ['id', 'DESC'],
             ]
         })
         .then(result => {
@@ -219,20 +219,6 @@ class IssueController {
         .catch(err => {
             res.send(err)
         })
-    }
-
-    static listIssuePost(req, res) {
-        // const { Issue_name } = req.body
-
-        // Issue.create({ Issue_name })
-        //     .then(result => {
-        //         //console.log(result);
-        //         let notif = `Successfully added issue "${result.dataValues.Issue_name}"`
-        //         res.redirect(`/categories?notif=${notif}`)
-        //     })
-        //     .catch(err => {
-        //         res.send(err)
-        //     })
     }
 
     static editIssue(req, res) {
@@ -255,6 +241,7 @@ class IssueController {
                 include: [
                     {
                         model: assignment,
+                        order:[ ['id', 'desc'] ],
                         include: [
                             {
                                 model: employee
@@ -267,7 +254,7 @@ class IssueController {
                 ],
                 required: false,
                 order: [
-                    ['id', 'DESC'],
+                    [assignment, 'id', 'DESC'],
                 ]
             })
         })
@@ -312,29 +299,6 @@ class IssueController {
         .catch(err=>{
             res.send(err)
         })
-    }
-
-    static deleteIssue(req, res) {
-        // const { id } = req.params
-
-        // Issue.findOne({
-        //     where: { id: +id }
-        // })
-        //     .then((result) => {
-        //         return Issue.destroy({
-        //             where: { id: +id }
-        //         })
-        //             .then((result2) => {
-        //                 let notif = `Successfully deleted issue ${result.dataValues.Issue_name}`
-        //                 res.redirect(`/categories?notif=${notif}`)
-        //             })
-        //             .catch(err => {
-        //                 res.send(err)
-        //             })
-        //     })
-        //     .catch(err => {
-        //         res.send(err)
-        //     })
     }
 }
 

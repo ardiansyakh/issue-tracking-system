@@ -5,6 +5,7 @@ const router = require('./routers/router')
 const path = require('path')
 const session = require('express-session')
 const multer = require("multer");
+const Highcharts = require('highcharts');
 
 app.set('view engine', 'ejs')
 app.use(express.urlencoded({ extended: true }))

@@ -2,14 +2,12 @@ const router = require('express').Router()
 const IssueController = require('../controllers/IssueController')
 const multer = require("multer");
 const upload = multer({ dest: "uploads/" });
-const checkSession = require('../helpers/checkSession')
+const checkSession = require('../helpers/checkSession');
 
 //Issue Employee
-router.get('/', IssueController.listIssue)
-// router.post('/', IssueController.listIssuePost)
-router.get('/edit/:id', IssueController.editIssue)
-router.post('/edit/:id', IssueController.editIssuePost)
-router.get('/delete/:id', IssueController.deleteIssue)
+router.get('/', checkSession, IssueController.listIssue)
+router.get('/edit/:id',checkSession, IssueController.editIssue)
+router.post('/edit/:id',checkSession, IssueController.editIssuePost)
 
 
 //Issue User
