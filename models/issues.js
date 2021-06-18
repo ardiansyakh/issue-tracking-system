@@ -16,6 +16,7 @@ module.exports = (sequelize, DataTypes) => {
   issue.init({
     issue_user_client_name: DataTypes.STRING,
     issue_user_client_email: DataTypes.STRING,
+    issue_ticket_number: DataTypes.STRING,
     issue_subject: DataTypes.STRING,
     issue_desc: DataTypes.STRING,
     issue_priority: DataTypes.STRING,
@@ -23,6 +24,7 @@ module.exports = (sequelize, DataTypes) => {
     issue_deadline: DataTypes.DATE,
     issue_category_id: DataTypes.INTEGER,
     issue_solved_by: DataTypes.INTEGER,
+    issue_attachment_filename: DataTypes.STRING,
   }, {
     sequelize,
     modelName: 'issue',
