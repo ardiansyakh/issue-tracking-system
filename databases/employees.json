@@ -1,21 +1,21 @@
 [
     {
         "employee_username": "abdullah",
-        "employee_password": 12345678,
+        "employee_password": "$2b$10$2adUEVud3dY9beEugf5UV.6gmbNYFLt8u9ptIstS4WH8cq3nvvpTa",
         "employee_first_name": "Abdullah",
         "employee_last_name": "Ardiansyah",
         "employee_role_id": 2
     },
     {
         "employee_username": "gulis",
-        "employee_password": 12345678,
+        "employee_password": "$2b$10$2adUEVud3dY9beEugf5UV.6gmbNYFLt8u9ptIstS4WH8cq3nvvpTa",
         "employee_first_name": "Gulistiani",
         "employee_last_name": "Fuzuli",
         "employee_role_id": 1
     },
     {
         "employee_username": "cecep",
-        "employee_password": 12345678,
+        "employee_password": "$2b$10$2adUEVud3dY9beEugf5UV.6gmbNYFLt8u9ptIstS4WH8cq3nvvpTa",
         "employee_first_name": "Cecep",
         "employee_last_name": "Gorbacep",
         "employee_role_id": 2
