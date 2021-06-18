@@ -180,7 +180,7 @@ class IssueController {
 
                     .then(result => {
                         issue_ticket_number = result.issue_ticket_number
-                        const index = Math.round(Math.random()*employees.length)
+                        const index = Math.floor(Math.random()*employees.length)
                         const assignment_employee_id = employees[index].id
                         return assignment.create({assignment_issue_id: result.id, assignment_employee_id})
                     })
@@ -209,9 +209,11 @@ class IssueController {
                     include: [{
                         model: employee,
                         attributes: ['employee_first_name']
-                    }]
+                    }],
+                    required: false
                 }
-            ]
+            ],
+            required: false
         })
         .then(result => {
             res.render('listIssue', { data: result, notif: notif, moment: moment })
@@ -254,7 +256,7 @@ class IssueController {
                 ],
                 required: false,
                 order: [
-                    [assignment, 'id', 'DESC'],
+                    ['id', 'DESC'],[assignment, 'id', 'DESC'],
                 ]
             })
         })
