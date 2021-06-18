@@ -19,6 +19,7 @@
     "database": "dbp8hn2cmfavk5",
     "host": "ec2-35-170-85-206.compute-1.amazonaws.com",
     "dialect": "postgres",
+    "uri": "postgres://bixhptrwgxdqml:85adb57ea0c56b75abb2ce38e0d02197f149f530967eb77c39e105c149a1d9e1@ec2-35-170-85-206.compute-1.amazonaws.com:5432/dbp8hn2cmfavk5",
     "dialectOptions": {
       "ssl": {
         "rejectUnauthorized": false
