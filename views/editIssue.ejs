@@ -55,9 +55,8 @@
 
     <!-- Main Content -->
     <div class="w3-container w3-light-grey" style="padding:128px 16px" id="student">
-        <h3 class="w3-center"> OPEN NEW TICKET </h3>
+        <h3 class="w3-center"> UPDATE ISSUE </h3>
         <br>
-
         <div class="container">
             <div class="row">
                 <div class="col-sm-1"></div>
@@ -71,90 +70,127 @@
                 <div class="col-sm-1"></div>
             </div>
         </div>
-
+        
         <div class="container">
             <div class="row">
-                <div class="col-1"></div>
-                <div class="col-10">
-                    <form action="/issues/issueUser/add" method="post" enctype="multipart/form-data">
+                <div class="col-12">
+                    <form action="/issues/edit/<%= data.id %>" method="POST">
                         <div class="form-group row">
-                            <label for="issue_user_client_name" class="col-sm-2 col-form-label">Contact
+                            <label for="issue_user_client_name" class="col-sm-4 col-form-label">Contact
                                 Name</label>
-                            <div class="col-sm-10">
+                            <div class="col-sm-8">
                                 <input type="text" class="form-control" name="issue_user_client_name"
-                                    placeholder="Input your name" required>
+                                    value=" <%= data.issue_user_client_name %>"disabled>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="issue_user_client_email" class="col-sm-2 col-form-label">Contact
+                            <label for="issue_user_client_email" class="col-sm-4 col-form-label">Contact
                                 Email</label>
-                            <div class="col-sm-10">
+                            <div class="col-sm-8">
                                 <input type="email" class="form-control" name="issue_user_client_email"
-                                    id="issue_user_client_email" placeholder="Input your email address" required>
+                                    id="issue_user_client_email" value=" <%= data.issue_user_client_email %>" disabled>
                             </div>
                         </div>
                         <hr>
                         <hr>
+
                         <div class="form-group row">
-                            <label for="issue_subject" class="col-sm-2 col-form-label">Subject</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" name="issue_subject" id="issue_subject"
-                                    placeholder="Input issue subject" required>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="issue_category" class="col-sm-2 col-form-label">Category</label>
-                            <div class="col-sm-10">
+                            <label for="issue_category" class="col-sm-4 col-form-label">Category</label>
+                            <div class="col-sm-8">
                                 <select name="issue_category" id="issue_category" class="form-control">
-                                    <option default selected>--Select Category--</option>
-                                    <% category.forEach(el=> {%>
-                                        <option value="<%= el.id %>">
-                                            <%= el.category_name %>
-                                        </option>
-                                        <% }) %>
+                                    <option disabled>--Select Category--</option>
+                                    <option value="<%=data.issue_category_id%>" default selected><%= data.category.category_name %></option>
+                                    <% categories.forEach(el=> {%>
+                                        <% if(el.id !== data.issue_category_id){%>
+                                            <option value="<%= el.id %>">
+                                                <%= el.category_name %>
+                                            </option>
+                                        <% } %>
+                                    <% }) %>
                                 </select>
                             </div>
                         </div>
+
                         <div class="form-group row">
-                            <label for="issue_desc" class="col-sm-2 col-form-label">Description</label>
-                            <div class="col-sm-10">
-                                <textarea rows="10" cols="50" class="form-control" name="issue_desc" id="issue_desc"
-                                    placeholder="Input detail of the problem encountered" required>   </textarea>
+                            <label for="issue_status" class="col-sm-4 col-form-label">Status</label>
+                            <div class="col-sm-8">
+                                <select name="issue_status" id="issue_status" class="form-control">
+                                    <option disabled>--Select Status--</option>
+                                    <option value="<%=data.issue_status%>" default selected><%= data.issue_status %></option>
+                                    <% status.forEach(el=> {%>
+                                        <% if(el !== data.issue_status){%>
+                                            <option value="<%= el %>">
+                                                <%= el %>
+                                            </option>
+                                        <% } %>
+                                    <% }) %>
+                                </select>
                             </div>
                         </div>
-                        <!-- <div class="input-group">
-                            <label for='files'>Select files</label>
-                            <input id='files' name="files" type="file">
-                        </div> -->
-                        <!-- <div class="file-path-wrapper">
-                            <input class="file-path validate" type="text">
-                        </div> -->
+
+                        <div class="form-group row">
+                            <label for="issue_employee" class="col-sm-4 col-form-label">CS Assigned</label>
+                            <div class="col-sm-8">
+                                <select name="assignment_employee_id" id="assignment_employee_id" class="form-control">
+                                    <option disabled>--Select Category--</option>
+                                    <option value="<%=data.assignments[0].employee.id%>" default selected><%= data.assignments[0].employee.fullName %></option>
+                                    <% employees.forEach(el=> {%>
+                                        <% if(el.id !== data.assignments[0].employee.id){%>
+                                            <option value="<%= el.id %>">
+                                                <%= el.fullName %>
+                                            </option>
+                                        <% } %>
+                                    <% }) %>
+                                </select>
+                            </div>
+                        </div>
+
+                        <hr>
+                        <hr>
+
+                        <div class="form-group row">
+                            <label for="issue_subject" class="col-sm-4 col-form-label">Subject</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="issue_subject" id="issue_subject"
+                                    value="<%= data.issue_subject %>" disabled>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="issue_desc" class="col-sm-4 col-form-label">Description</label>
+                            <div class="col-sm-8">
+                                <textarea rows="10" cols="50" class="form-control" name="issue_desc" id="issue_desc"
+                                    disabled>  <%= data.issue_desc %> </textarea>
+                            </div>
+                        </div>
+
+                        <a class="w3-button w3-blue" href="/issues/download/<%= data.issue_attachment_filename? data.issue_attachment_filename+'?status=found' : data.issue_attachment_filename+'?status=notfound' %>">
+                           Download Attachement</a>
 
                         <div class="file-field input-field">
-                            <div class="btn grey">
-                                <span>File</span>
-                                <input name="myFile" type="file">
-                            </div>
-                            <div class="file-path-wrapper">
-                                <input class="file-path validate" type="text">
-                            </div>
+                            <!-- <div class="btn grey">
+                                    <span>File</span>
+                                    <input name="myFile" type="file">
+                                </div> -->
+
+
                         </div>
-                        <a class="w3-button w3-blue" href="/"><i class="fa fa-undo"></i>
+                        <br>
+                        <a class="w3-button w3-blue" href="/issues"><i class="fa fa-undo"></i>
                             BACK</a>
                         <button class="w3-button w3-green" type="submit">
-                            <i class="fa fa-paper-plane"></i> SUBMIT
+                                <i class="fa fa-paper-plane"></i> UPDATE
                         </button>
-                        </p>
+                        <br>
+
+                        <img src="<%= typeof file !='undefined' ? file : '' %>" class="responsive-img">
                     </form>
-
-                    <br>
-
-                    <img src="<%= typeof file !='undefined' ? file : '' %>" class="responsive-img">
                 </div>
-                <div class="col-1"> </div>
+
             </div>
         </div>
     </div>
+
 
     <!-- Footer -->
     <footer class="w3-center w3-black w3-padding-16">
