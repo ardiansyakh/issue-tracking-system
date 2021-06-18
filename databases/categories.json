@@ -1,14 +1,34 @@
 [
     {
-        "category_name": "Modul HR"
+        "category_name": "Modul HR",
+        "category_initial": "HR"
     },
     {
-        "category_name": "Modul Sales"
+        "category_name": "Modul Sales",
+        "category_initial": "SD"
     },
     {
-        "category_name": "Modul Procurement"
+        "category_name": "Modul Procurement",
+        "category_initial": "PR"
     },
     {
-        "category_name": "Modul Finance"
+        "category_name": "Modul Financial Accounting",
+        "category_initial": "FI"
+    },
+    {
+        "category_name": "Modul Controlling",
+        "category_initial": "CO"
+    },
+    {
+        "category_name": "Modul Production Planning",
+        "category_initial": "PP"
+    },
+    {
+        "category_name": "Modul Material Management",
+        "category_initial": "MM"
+    },
+    {
+        "category_name": "Modul Plant Maintenance",
+        "category_initial": "PM"
     }
 ]

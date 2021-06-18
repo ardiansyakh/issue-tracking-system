@@ -54,46 +54,85 @@
 
     <!-- Main Content -->
     <div class="w3-container w3-light-grey" style="padding:128px 16px" id="student">
-        <h3 class="w3-center"> EDIT CATEGORY </h3>
+        <h3 class="w3-center"> LIST ISSUE </h3>
         <br>
 
         <div class="container">
             <div class="row">
-                <div class="col-sm-1"></div>
-                <div class="col-sm-10">
+                <div class="col-sm-12">
                     <% if(notif) { %>
                         <div class="alert alert-success" role="alert">
                             <%= notif %>
                         </div>
                         <% } %>
                 </div>
-                <div class="col-sm-1"></div>
             </div>
         </div>
 
         <div class="container">
             <div class="row">
-                <div class="col-1"></div>
-                <div class="col-5">
-                    <form action="/categories/edit/<%= data.id %>" method="post">
-                        <p><input class="w3-input w3-border" type="text" placeholder="Input category"
-                                value="<%= data.category_name %>" name="category_name" required></p>
-                        <p>
-                        <p><input class="w3-input w3-border" type="text" placeholder="Input category initial"
-                                value="<%= data.category_initial %>" name="category_initial" required></p>
-                        <p>
-                            <a class="w3-button w3-blue" href="/categories"><i class="fa fa-undo"></i>
-                                BACK</a>
-                            <button class="w3-button w3-green" type="submit">
-                                <i class="fa fa-paper-plane"></i> SUBMIT
-                            </button>
-                        </p>
-                    </form>
+                <div class="col-sm-10"></div>
+                <div class="col-sm-2">
+                    <a class="m-1 btn btn-success" href="/issues/issueUser/add"><i class="fa fa-plus"></i> Add New</a>
                 </div>
-
-                <div class="col-6"> </div>
             </div>
         </div>
+
+        <div class="container">
+            <div class="row">
+
+                <table class="table table-hover align-items-center">
+                    <thead class="text-center">
+                        <tr>
+                            <th scope="col">Ticket Number</th>
+                            <th scope="col" class="text-center">Raised Date</th>
+                            <th scope="col" class="text-center">Raised By</th>
+                            <th scope="col" class="text-center">Category</th>
+                            <th scope="col" class="text-center">Subject</th>
+                            <th scope="col" class="text-center">Status</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <% data.forEach(el=> {%>
+                            <tr>
+                                <td>
+                                    <%= el.issue_ticket_number %>
+                                </td>
+                                <td class="text-center">
+                                    <% let dd=String(el.createdAt.getDate()).padStart(2, '0' ) %>
+                                        <% let mm=String(el.createdAt.getMonth() + 1).padStart(2, '0' ); //January is 0!
+                                            %>
+                                            <% let yyyy=el.createdAt.getFullYear(); %>
+                                                <!-- <%= dd + '-' + mm + '-' + yyyy%> -->
+
+                                                <%= moment(el.createdAt).format('llll')%>
+                                </td>
+                                <td class="text-center">
+                                    <%= el.issue_user_client_name %>
+                                </td>
+                                <td class="text-center">
+                                    <%= el.category.category_name %>
+                                </td>
+                                <td class="text-center">
+                                    <%= el.issue_subject %>
+                                </td>
+                                <td class="text-center">
+                                    <%= el.issue_status %>
+                                </td>
+                                <td class="d-flex align-items-center justify-content-start">
+                                    <a class="m-1 btn btn-info" data-toggle="tooltip" title="Details"
+                                        href="/issues/issueUser/detail/<%= el.id %>"><i class="fa fa-table"></i></a>
+                                </td>
+                            </tr>
+                            <% }) %>
+                    </tbody>
+                </table>
+
+            </div>
+
+        </div>
+
     </div>
 
 
