@@ -14,7 +14,7 @@ router.get('/issueUser/edit/:id', IssueController.editIssueUser)
 router.post('/issueUser/edit/:id', IssueController.editIssueUserPost)
 
 router.get('/', IssueController.listIssue)
-router.post('/', IssueController.listIssuePost)
+// router.post('/', IssueController.listIssuePost)
 router.get('/edit/:id', IssueController.editIssue)
 router.post('/edit/:id', IssueController.editIssuePost)
 router.get('/delete/:id', IssueController.deleteIssue)
